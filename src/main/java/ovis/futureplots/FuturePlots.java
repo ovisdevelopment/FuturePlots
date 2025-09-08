@@ -267,7 +267,6 @@ public class FuturePlots extends PluginBase {
             if(new File(getDataFolder() + "/config.yml").renameTo(new File(getDataFolder() + "/config_old_" + config.getString("version") + ".yml"))) {
                 getLogger().critical("The version of the config file does not match. You will find the old file marked \"" + "config_old_" + config.getString("version") + ".yml" + "\" in the same directory.");
                 saveResource("config.yml");
-                getSettings().init();
             }
         }
     }
