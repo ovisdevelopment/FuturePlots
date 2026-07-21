@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ovis.futureplots</groupId>
   <artifactId>FuturePlots</artifactId>
-  <version>4.0.2-SNAPSHOT</version>
+  <version>4.1.0-dev</version>
   <scm>
     <connection>scm:git:git://github.com/ovisdevelopment/FuturePlots.git</connection>
     <developerConnection>scm:git:ssh://git@github.com:ovisdevelopment/FuturePlots.git</developerConnection>
@@ -41,6 +41,8 @@
                 <includes>
                   <include>com.github.luben:zstd-jni</include>
                   <include>org.mongodb:*</include>
+                  <include>com.mysql:*</include>
+                  <include>org.xerial:sqlite-jdbc</include>
                 </includes>
               </artifactSet>
             </configuration>
@@ -72,6 +74,11 @@
       <url>https://repo.maven.apache.org/maven2/</url>
     </repository>
     <repository>
+      <id>PowerNukkitX-releases</id>
+      <name>PowerNukkitX Repository</name>
+      <url>https://repo.powernukkitx.org/releases</url>
+    </repository>
+    <repository>
       <id>jitpack.io</id>
       <url>https://www.jitpack.io</url>
     </repository>
@@ -88,9 +95,9 @@
   </repositories>
   <dependencies>
     <dependency>
-      <groupId>com.github.PowerNukkitX</groupId>
-      <artifactId>PowerNukkitX</artifactId>
-      <version>master-SNAPSHOT</version>
+      <groupId>org.powernukkitx</groupId>
+      <artifactId>server</artifactId>
+      <version>nightly-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -106,29 +113,16 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>com.mysql</groupId>
-      <artifactId>mysql-connector-j</artifactId>
-      <version>8.3.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>org.json</groupId>
       <artifactId>json</artifactId>
       <version>20240303</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>ru.nukkit.dblib</groupId>
-      <artifactId>DbLib</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>net.lldv.llamaeconomy</groupId>
       <artifactId>LlamaEconomy</artifactId>
-      <version>1.0.0</version>
-      <scope>system</scope>
-      <systemPath>${basedir}/libs/LlamaEconomy-Modified.jar</systemPath>
+      <version>1.0.2</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
   <properties>

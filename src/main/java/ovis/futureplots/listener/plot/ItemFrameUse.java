@@ -17,12 +17,12 @@
 
 package ovis.futureplots.listener.plot;
 
-import cn.nukkit.Player;
-import cn.nukkit.blockentity.BlockEntityItemFrame;
-import cn.nukkit.event.EventHandler;
-import cn.nukkit.event.EventPriority;
-import cn.nukkit.event.Listener;
-import cn.nukkit.event.block.ItemFrameUseEvent;
+import org.powernukkitx.Player;
+import org.powernukkitx.blockentity.BlockEntityItemFrame;
+import org.powernukkitx.event.EventHandler;
+import org.powernukkitx.event.EventPriority;
+import org.powernukkitx.event.Listener;
+import org.powernukkitx.event.block.ItemFrameUseEvent;
 import lombok.RequiredArgsConstructor;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.components.util.Plot;

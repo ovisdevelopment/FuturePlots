@@ -17,7 +17,7 @@
 
 package ovis.futureplots.components.provider.data;
 
-import cn.nukkit.math.BlockVector3;
+import org.powernukkitx.math.BlockVector3;
 
 import lombok.Getter;
 import lombok.Setter;

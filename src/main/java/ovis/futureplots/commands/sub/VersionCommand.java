@@ -17,8 +17,8 @@
 
 package ovis.futureplots.commands.sub;
 
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.plugin.PluginDescription;
+import org.powernukkitx.command.CommandSender;
+import org.powernukkitx.plugin.PluginDescription;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.commands.SubCommand;
 

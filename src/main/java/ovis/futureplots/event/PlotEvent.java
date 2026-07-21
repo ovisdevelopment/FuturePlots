@@ -18,7 +18,7 @@
 
 package ovis.futureplots.event;
 
-import cn.nukkit.event.Event;
+import org.powernukkitx.event.Event;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import ovis.futureplots.components.util.Plot;

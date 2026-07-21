@@ -18,16 +18,13 @@
 
 package ovis.futureplots.commands.sub;
 
-import cn.nukkit.Player;
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParamType;
-import cn.nukkit.command.data.CommandParameter;
+import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
+import org.powernukkitx.Player;
+import org.powernukkitx.command.CommandSender;
+import org.powernukkitx.command.data.CommandParameter;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.commands.SubCommand;
-import ovis.futureplots.components.util.Plot;
-import ovis.futureplots.manager.PlotManager;
 
-import java.util.UUID;
 
 /**
  * @author Tim tim03we, Ovis Development (2024)
@@ -41,7 +38,7 @@ public class HelpCommand extends SubCommand {
         this.plugin = plugin;
         this.identify();
         this.playerOnly();
-        this.addParameter(CommandParameter.newType("player", CommandParamType.TARGET));
+        this.addParameter(CommandParameter.newType("player", CommandParamType.SELECTION));
     }
 
     @Override

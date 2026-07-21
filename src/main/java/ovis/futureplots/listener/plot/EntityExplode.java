@@ -18,10 +18,10 @@
 
 package ovis.futureplots.listener.plot;
 
-import cn.nukkit.event.EventHandler;
-import cn.nukkit.event.EventPriority;
-import cn.nukkit.event.Listener;
-import cn.nukkit.event.entity.EntityExplodeEvent;
+import org.powernukkitx.event.EventHandler;
+import org.powernukkitx.event.EventPriority;
+import org.powernukkitx.event.Listener;
+import org.powernukkitx.event.entity.EntityExplodeEvent;
 import lombok.RequiredArgsConstructor;
 import ovis.futureplots.FuturePlots;
 

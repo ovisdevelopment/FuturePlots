@@ -18,13 +18,13 @@
 
 package ovis.futureplots.listener.plot;
 
-import cn.nukkit.entity.Entity;
-import cn.nukkit.event.EventHandler;
-import cn.nukkit.event.EventPriority;
-import cn.nukkit.event.Listener;
-import cn.nukkit.event.entity.EntityDamageByEntityEvent;
-import cn.nukkit.event.entity.EntityDamageEvent;
 import lombok.RequiredArgsConstructor;
+import org.powernukkitx.entity.Entity;
+import org.powernukkitx.event.EventHandler;
+import org.powernukkitx.event.EventPriority;
+import org.powernukkitx.event.Listener;
+import org.powernukkitx.event.entity.EntityDamageByEntityEvent;
+import org.powernukkitx.event.entity.EntityDamageEvent;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.manager.PlotManager;
 import ovis.futureplots.components.util.Plot;

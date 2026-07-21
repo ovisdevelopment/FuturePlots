@@ -18,7 +18,7 @@
 
 package ovis.futureplots.schematic;
 
-import cn.nukkit.block.BlockState;
+import org.powernukkitx.block.BlockState;
 import lombok.Value;
 
 /**

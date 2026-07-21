@@ -18,11 +18,11 @@
 
 package ovis.futureplots.commands.sub;
 
-import cn.nukkit.Player;
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandEnum;
-import cn.nukkit.command.data.CommandParamType;
-import cn.nukkit.command.data.CommandParameter;
+import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
+import org.powernukkitx.Player;
+import org.powernukkitx.command.CommandSender;
+import org.powernukkitx.command.data.CommandEnum;
+import org.powernukkitx.command.data.CommandParameter;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.commands.SubCommand;
 import ovis.futureplots.components.util.language.TranslationKey;
@@ -42,7 +42,7 @@ public class GenerateCommand extends SubCommand {
         this.identify();
         this.playerOnly();
         this.setPermissions("plots.generate", "plots.perm.admin");
-        this.addParameter(CommandParameter.newType("level", CommandParamType.STRING));
+        this.addParameter(CommandParameter.newType("level", CommandParamType.ARG));
         this.addParameter(CommandParameter.newEnum("default", new CommandEnum("should be default level?", "true", "false")));
     }
 

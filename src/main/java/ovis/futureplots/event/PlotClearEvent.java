@@ -18,8 +18,8 @@
 
 package ovis.futureplots.event;
 
-import cn.nukkit.event.Cancellable;
-import cn.nukkit.event.HandlerList;
+import org.powernukkitx.event.Cancellable;
+import org.powernukkitx.event.HandlerList;
 import lombok.Getter;
 import ovis.futureplots.components.util.Plot;
 

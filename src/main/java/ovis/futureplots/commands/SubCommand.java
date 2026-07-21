@@ -17,10 +17,10 @@
 
 package ovis.futureplots.commands;
 
-import cn.nukkit.Player;
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParameter;
-import cn.nukkit.utils.Config;
+import org.powernukkitx.Player;
+import org.powernukkitx.command.CommandSender;
+import org.powernukkitx.command.data.CommandParameter;
+import org.powernukkitx.utils.Config;
 import lombok.Getter;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.components.util.language.manager.LanguageManager;
@@ -145,7 +145,7 @@ public abstract class SubCommand {
     protected String translate(CommandSender sender, String key, Object... replacements) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
-            return new LanguageManager(player.getLoginChainData().getLanguageCode()).message(player.getUniqueId(), key, replacements);
+            return new LanguageManager(player.getClientChainData().getLanguageCode()).message(player.getUniqueId(), key, replacements);
         }
         return new LanguageManager(FuturePlots.getSettings().getDefaultLanguage()).message(null, key, replacements);
     }

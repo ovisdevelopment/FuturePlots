@@ -18,13 +18,15 @@
 
 package ovis.futureplots.commands.sub;
 
-import cn.nukkit.Player;
-import cn.nukkit.block.Block;
-import cn.nukkit.block.BlockState;
-import cn.nukkit.blockentity.BlockEntity;
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.level.Level;
-import cn.nukkit.math.Vector3;
+import org.cloudburstmc.nbt.NbtMap;
+import org.powernukkitx.Player;
+import org.powernukkitx.block.Block;
+import org.powernukkitx.block.BlockState;
+import org.powernukkitx.blockentity.BlockEntity;
+import org.powernukkitx.command.CommandSender;
+import org.powernukkitx.level.Level;
+import org.powernukkitx.math.Vector3;
+import org.powernukkitx.nbt.tag.CompoundTag;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.commands.SubCommand;
 import ovis.futureplots.generator.PlotGenerator;
@@ -104,8 +106,22 @@ public class SetRoadsCommand extends SubCommand {
                         ));
 
                         final BlockEntity blockEntity = level.getBlockEntity(new Vector3(x, y, z));
-                        if (blockEntity != null)
-                            schematic.addBlockEntity(blockVector.asBlockVector3(), blockEntity.getSaveId(), blockEntity.namedTag.copy().remove("x").remove("y").remove("z"));
+                        if (blockEntity != null) {
+
+                            CompoundTag nbt = blockEntity.getNbt();
+
+                            CompoundTag cleaned = nbt.copy()
+                                    .remove("x")
+                                    .remove("y")
+                                    .remove("z");
+
+                            schematic.addBlockEntity(
+                                    blockVector.asBlockVector3(),
+                                    blockEntity.getSaveId(),
+                                    cleaned
+                            );
+                        }
+
                     }
                 }
             }

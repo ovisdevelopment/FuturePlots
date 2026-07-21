@@ -17,7 +17,7 @@
 
 package ovis.futureplots.components.util;
 
-import cn.nukkit.utils.Config;
+import org.powernukkitx.utils.Config;
 import lombok.Getter;
 import ovis.futureplots.FuturePlots;
 

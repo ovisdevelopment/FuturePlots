@@ -18,11 +18,14 @@
 
 package ovis.futureplots.schematic.format;
 
-import cn.nukkit.math.BlockVector3;
-import cn.nukkit.math.Vector3;
-import cn.nukkit.nbt.tag.CompoundTag;
-import cn.nukkit.registry.Registries;
-import cn.nukkit.utils.BinaryStream;
+import io.netty.buffer.ByteBuf;
+import org.cloudburstmc.nbt.NBTOutputStream;
+import org.cloudburstmc.nbt.NbtMap;
+import org.cloudburstmc.nbt.NbtUtils;
+import org.powernukkitx.math.BlockVector3;
+import org.powernukkitx.math.Vector3;
+import org.powernukkitx.nbt.tag.CompoundTag;
+import org.powernukkitx.registry.Registries;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -30,6 +33,8 @@ import ovis.futureplots.schematic.Schematic;
 import ovis.futureplots.schematic.SchematicBlock;
 import ovis.futureplots.schematic.SchematicBlockEntity;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.Map;
 
 /**
@@ -37,78 +42,142 @@ import java.util.Map;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SchematicSerializerV3 implements SchematicSerializer {
+
     public static final SchematicSerializer INSTANCE = new SchematicSerializerV3();
 
     @Override
-    public void serialize(Schematic schematic, BinaryStream binaryStream) {
-        binaryStream.putLInt(schematic.getBlockPalette().size());
+    public void serialize(Schematic schematic, ByteBuf buf) {
 
-        for(SchematicBlock block : schematic.getBlockPalette()) {
-            binaryStream.putLInt(block.getLayer0().blockStateHash());
-            binaryStream.putLInt(block.getLayer1().blockStateHash());
+        // Block Palette
+        buf.writeIntLE(schematic.getBlockPalette().size());
+
+        for (SchematicBlock block : schematic.getBlockPalette()) {
+            buf.writeIntLE(block.getLayer0().blockStateHash());
+            buf.writeIntLE(block.getLayer1().blockStateHash());
         }
 
-        binaryStream.putLInt(schematic.getBlocks().size());
-        for(Object2IntMap.Entry<Vector3> entry : schematic.getBlocks().object2IntEntrySet()) {
-            final Vector3 blockVector = entry.getKey();
-            final int paletteIndex = entry.getIntValue();
+        // Blocks
+        buf.writeIntLE(schematic.getBlocks().size());
 
-            binaryStream.putLInt(blockVector.getFloorX());
-            binaryStream.putLInt(blockVector.getFloorY());
-            binaryStream.putLInt(blockVector.getFloorZ());
+        for (Object2IntMap.Entry<Vector3> entry : schematic.getBlocks().object2IntEntrySet()) {
+            Vector3 pos = entry.getKey();
+            int paletteIndex = entry.getIntValue();
 
-            binaryStream.putLInt(paletteIndex);
+            buf.writeIntLE(pos.getFloorX());
+            buf.writeIntLE(pos.getFloorY());
+            buf.writeIntLE(pos.getFloorZ());
+
+            buf.writeIntLE(paletteIndex);
         }
 
-        binaryStream.putLInt(schematic.getBlockEntities().size());
-        for(Map.Entry<BlockVector3, SchematicBlockEntity> entry : schematic.getBlockEntities().entrySet()) {
-            final BlockVector3 blockVector = entry.getKey();
-            final SchematicBlockEntity blockEntity = entry.getValue();
+        // Block Entities
+        buf.writeIntLE(schematic.getBlockEntities().size());
 
-            binaryStream.putLInt(blockVector.getX());
-            binaryStream.putLInt(blockVector.getY());
-            binaryStream.putLInt(blockVector.getZ());
+        for (Map.Entry<BlockVector3, SchematicBlockEntity> entry : schematic.getBlockEntities().entrySet()) {
+            BlockVector3 pos = entry.getKey();
+            SchematicBlockEntity entity = entry.getValue();
 
-            binaryStream.putString(blockEntity.getType());
-            binaryStream.putTag(blockEntity.getCompoundTag());
+            buf.writeIntLE(pos.getX());
+            buf.writeIntLE(pos.getY());
+            buf.writeIntLE(pos.getZ());
+
+            writeString(buf, entity.getType());
+
+            byte[] nbtBytes = writeNbt(entity.getCompoundTag().toNetwork());
+            buf.writeIntLE(nbtBytes.length);
+            buf.writeBytes(nbtBytes);
         }
     }
 
     @Override
-    public void deserialize(Schematic schematic, BinaryStream binaryStream) {
-        final int blockPaletteCount = binaryStream.getLInt();
-        for(int i = 0; i < blockPaletteCount; i++) {
-            final int blockLayer0Id = binaryStream.getLInt();
-            final int blockLayer1Id = binaryStream.getLInt();
-            schematic.getBlockPalette().add(new SchematicBlock(Registries.BLOCKSTATE.get(blockLayer0Id), Registries.BLOCKSTATE.get(blockLayer1Id)));
+    public void deserialize(Schematic schematic, ByteBuf buf) {
+
+        // Block Palette
+        int paletteCount = buf.readIntLE();
+
+        for (int i = 0; i < paletteCount; i++) {
+            int layer0 = buf.readIntLE();
+            int layer1 = buf.readIntLE();
+
+            schematic.getBlockPalette().add(
+                    new SchematicBlock(
+                            Registries.BLOCKSTATE.get(layer0),
+                            Registries.BLOCKSTATE.get(layer1)
+                    )
+            );
         }
 
-        final int blockCount = binaryStream.getLInt();
-        for(int i = 0; i < blockCount; i++) {
-            final int blockX = binaryStream.getLInt();
-            final int blockY = binaryStream.getLInt();
-            final int blockZ = binaryStream.getLInt();
+        // Blocks
+        int blockCount = buf.readIntLE();
 
-            final int blockPaletteIndex = binaryStream.getLInt();
-            schematic.getBlocks().put(new Vector3(blockX, blockY, blockZ), blockPaletteIndex);
+        for (int i = 0; i < blockCount; i++) {
+            int x = buf.readIntLE();
+            int y = buf.readIntLE();
+            int z = buf.readIntLE();
+
+            int paletteIndex = buf.readIntLE();
+
+            schematic.getBlocks().put(new Vector3(x, y, z), paletteIndex);
         }
 
-        final int blockEntityCount = binaryStream.getLInt();
-        for(int i = 0; i < blockEntityCount; i++) {
-            final int blockX = binaryStream.getLInt();
-            final int blockY = binaryStream.getLInt();
-            final int blockZ = binaryStream.getLInt();
+        // Block Entities
+        int entityCount = buf.readIntLE();
 
-            final String type = binaryStream.getString();
-            final CompoundTag compoundTag = binaryStream.getTag();
+        for (int i = 0; i < entityCount; i++) {
+            int x = buf.readIntLE();
+            int y = buf.readIntLE();
+            int z = buf.readIntLE();
 
-            schematic.getBlockEntities().put(new BlockVector3(blockX, blockY, blockZ), new SchematicBlockEntity(type, compoundTag));
+            String type = readString(buf);
+
+            int nbtLength = buf.readIntLE();
+            byte[] nbtBytes = new byte[nbtLength];
+            buf.readBytes(nbtBytes);
+
+            CompoundTag tag = CompoundTag.fromNetwork(readNbt(nbtBytes));
+
+            schematic.getBlockEntities().put(
+                    new BlockVector3(x, y, z),
+                    new SchematicBlockEntity(type, tag)
+            );
         }
     }
 
     @Override
     public int version() {
         return 3;
+    }
+
+    private void writeString(ByteBuf buf, String s) {
+        byte[] bytes = s.getBytes();
+        buf.writeIntLE(bytes.length);
+        buf.writeBytes(bytes);
+    }
+
+    private String readString(ByteBuf buf) {
+        int len = buf.readIntLE();
+        byte[] bytes = new byte[len];
+        buf.readBytes(bytes);
+        return new String(bytes);
+    }
+
+    private byte[] writeNbt(NbtMap tag) {
+        try (ByteArrayOutputStream out = new ByteArrayOutputStream();
+             NBTOutputStream writer = NbtUtils.createWriterLE(out)) {
+
+            writer.writeTag(tag);
+            return out.toByteArray();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private NbtMap readNbt(byte[] bytes) {
+        try (ByteArrayInputStream in = new ByteArrayInputStream(bytes)) {
+            return (NbtMap) NbtUtils.createReaderLE(in).readTag();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

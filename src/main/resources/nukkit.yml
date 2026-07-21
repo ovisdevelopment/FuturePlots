@@ -1,6 +1,6 @@
 name: FuturePlots
 main: ovis.futureplots.FuturePlots
-api: 2.0.0
+api: 3.0.0
 authors:
   - OvisDevelopment
   - tim03we

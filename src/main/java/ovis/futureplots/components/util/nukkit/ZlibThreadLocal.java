@@ -1,7 +1,7 @@
 package ovis.futureplots.components.util.nukkit;
 
-import cn.nukkit.nbt.stream.FastByteArrayOutputStream;
-import cn.nukkit.utils.ThreadCache;
+import it.unimi.dsi.fastutil.io.FastByteArrayOutputStream;
+import ovis.futureplots.components.util.ThreadCache;
 
 import java.io.IOException;
 import java.util.zip.DataFormatException;

@@ -18,10 +18,10 @@
 
 package ovis.futureplots.commands.sub;
 
-import cn.nukkit.Player;
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.form.element.simple.ElementButton;
-import cn.nukkit.form.window.SimpleForm;
+import org.powernukkitx.Player;
+import org.powernukkitx.command.CommandSender;
+import org.powernukkitx.form.element.simple.ElementButton;
+import org.powernukkitx.form.window.SimpleForm;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.commands.SubCommand;
 import ovis.futureplots.components.util.language.TranslationKey;

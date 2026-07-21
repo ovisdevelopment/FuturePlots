@@ -18,13 +18,13 @@
 
 package ovis.futureplots.commands.sub;
 
-import cn.nukkit.Player;
-import cn.nukkit.block.Block;
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandEnum;
-import cn.nukkit.command.data.CommandParamType;
-import cn.nukkit.command.data.CommandParameter;
-import cn.nukkit.registry.Registries;
+import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
+import org.powernukkitx.Player;
+import org.powernukkitx.block.Block;
+import org.powernukkitx.command.CommandSender;
+import org.powernukkitx.command.data.CommandEnum;
+import org.powernukkitx.command.data.CommandParameter;
+import org.powernukkitx.registry.Registries;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.commands.SubCommand;
 import ovis.futureplots.components.util.flags.Flag;
@@ -35,7 +35,6 @@ import ovis.futureplots.manager.PlotManager;
 import ovis.futureplots.components.util.Plot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -56,21 +55,21 @@ public class FlagCommand extends SubCommand {
                 new CommandParameter[]{
                         CommandParameter.newEnum("set", new String[]{"set"}),
                         CommandParameter.newEnum("flag", false, new CommandEnum("set", getAsArray(FlagType.STRING, FlagType.BOOLEAN, FlagType.INTEGER, FlagType.DOUBLE))),
-                        CommandParameter.newType("value", CommandParamType.STRING)
+                        CommandParameter.newType("value", CommandParamType.ARG)
                 }
         );
         this.addSubParameter("_add",
                 new CommandParameter[]{
                         CommandParameter.newEnum("add", new String[]{"add"}),
                         CommandParameter.newEnum("flag", false, new CommandEnum("add", getAsArray(FlagType.BLOCK_TYPE_LIST))),
-                        CommandParameter.newType("value", CommandParamType.STRING)
+                        CommandParameter.newType("value", CommandParamType.ARG)
                 }
         );
         this.addSubParameter("_remove",
                 new CommandParameter[]{
                         CommandParameter.newEnum("remove", new String[]{"remove"}),
                         CommandParameter.newEnum("flag", false, new CommandEnum("remove", getAsArray(null))),
-                        CommandParameter.newType("value", true, CommandParamType.STRING)
+                        CommandParameter.newType("value", true, CommandParamType.ARG)
                 }
         );
         this.addSubParameter("_list",

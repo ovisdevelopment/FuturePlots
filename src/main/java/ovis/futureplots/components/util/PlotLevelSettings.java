@@ -18,12 +18,12 @@
 
 package ovis.futureplots.components.util;
 
-import cn.nukkit.block.*;
-import cn.nukkit.block.property.CommonBlockProperties;
-import cn.nukkit.block.property.enums.MinecraftVerticalHalf;
-import cn.nukkit.level.Level;
-import cn.nukkit.level.biome.BiomeID;
-import cn.nukkit.registry.Registries;
+import org.powernukkitx.block.*;
+import org.powernukkitx.block.property.CommonBlockProperties;
+import org.powernukkitx.block.property.enums.MinecraftVerticalHalf;
+import org.powernukkitx.level.Level;
+import org.powernukkitx.level.biome.BiomeID;
+import org.powernukkitx.registry.Registries;
 import lombok.Getter;
 import lombok.Setter;
 

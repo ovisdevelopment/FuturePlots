@@ -18,10 +18,10 @@
 
 package ovis.futureplots.commands.sub;
 
-import cn.nukkit.Player;
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParamType;
-import cn.nukkit.command.data.CommandParameter;
+import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
+import org.powernukkitx.Player;
+import org.powernukkitx.command.CommandSender;
+import org.powernukkitx.command.data.CommandParameter;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.commands.SubCommand;
 import ovis.futureplots.components.util.Plot;
@@ -43,7 +43,7 @@ public class TrustCommand extends SubCommand {
         this.identify();
         this.playerOnly();
         this.setPermissions("plots.trust", "plots.perm.basic");
-        this.addParameter(CommandParameter.newType("player", CommandParamType.TARGET));
+        this.addParameter(CommandParameter.newType("player", CommandParamType.SELECTION));
     }
 
     @Override

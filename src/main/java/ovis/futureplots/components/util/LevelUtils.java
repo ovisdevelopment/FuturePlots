@@ -18,7 +18,7 @@
 
 package ovis.futureplots.components.util;
 
-import cn.nukkit.level.Level;
+import org.powernukkitx.level.Level;
 import lombok.experimental.UtilityClass;
 
 /**

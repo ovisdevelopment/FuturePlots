@@ -17,10 +17,11 @@
 
 package ovis.futureplots.commands;
 
-import cn.nukkit.Player;
-import cn.nukkit.command.Command;
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.*;
+import org.cloudburstmc.protocol.bedrock.data.command.CommandData;
+import org.powernukkitx.Player;
+import org.powernukkitx.command.Command;
+import org.powernukkitx.command.CommandSender;
+import org.powernukkitx.command.data.*;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.commands.sub.*;
 import ovis.futureplots.components.util.language.TranslationKey;
@@ -125,7 +126,7 @@ public class PlotCommand extends Command {
                     }
                 } else {
                     if(!subCommand.hasPermission(player)) {
-                        LanguageManager languageManager = new LanguageManager(player.getLoginChainData().getLanguageCode());
+                        LanguageManager languageManager = new LanguageManager(player.getClientChainData().getLanguageCode());
                         sender.sendMessage(languageManager.message(player.getUniqueId(), TranslationKey.NO_PERMS, subCommand.getPermissions().toArray()[0]));
                         return true;
                     }
@@ -139,7 +140,7 @@ public class PlotCommand extends Command {
     @Override
     public CommandDataVersions generateCustomCommandData(Player player) {
         final CommandDataVersions versions = super.generateCustomCommandData(player);
-        final CommandData commandData = versions.versions.get(0);
+        final NukkitCommandData commandData = versions.versions.get(0);
 
         final Map<String, CommandOverload> overloads = new HashMap<>(commandData.overloads);
         for (Map.Entry<String, CommandOverload> entry : overloads.entrySet()) {

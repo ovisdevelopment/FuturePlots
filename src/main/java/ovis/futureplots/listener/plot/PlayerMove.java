@@ -18,10 +18,10 @@
 
 package ovis.futureplots.listener.plot;
 
-import cn.nukkit.Player;
-import cn.nukkit.event.EventHandler;
-import cn.nukkit.event.Listener;
-import cn.nukkit.event.player.PlayerMoveEvent;
+import org.powernukkitx.Player;
+import org.powernukkitx.event.EventHandler;
+import org.powernukkitx.event.Listener;
+import org.powernukkitx.event.player.PlayerMoveEvent;
 import lombok.RequiredArgsConstructor;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.components.util.language.manager.LanguageManager;
@@ -68,7 +68,7 @@ public class PlayerMove implements Listener {
                         return;
                     }
                     if(!(boolean) plotTo.getFlagValue("hide-actionbar") && !(boolean) plotTo.getFlagValue("server-plot")) {
-                        LanguageManager language = new LanguageManager(player.getLoginChainData().getLanguageCode());
+                        LanguageManager language = new LanguageManager(player.getClientChainData().getLanguageCode());
                         if(!plotTo.hasOwner())
                             player.sendActionBar(language.message(TranslationKey.PLOT_POPUP_NO_OWNER, plotTo.getId().toString()));
                         else

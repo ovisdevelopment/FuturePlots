@@ -18,7 +18,7 @@
 
 package ovis.futureplots.schematic.format;
 
-import cn.nukkit.utils.BinaryStream;
+import io.netty.buffer.ByteBuf;
 import ovis.futureplots.schematic.Schematic;
 
 /**
@@ -26,10 +26,9 @@ import ovis.futureplots.schematic.Schematic;
  */
 public interface SchematicSerializer {
 
-    void serialize(Schematic schematic, BinaryStream binaryStream);
+    void serialize(Schematic schematic, ByteBuf buf);
 
-    void deserialize(Schematic schematic, BinaryStream binaryStream);
+    void deserialize(Schematic schematic, ByteBuf buf);
 
     int version();
-
 }

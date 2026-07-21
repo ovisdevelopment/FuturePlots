@@ -1,11 +1,11 @@
 package ovis.futureplots.components.bstats;
 
-import cn.nukkit.Server;
-import cn.nukkit.plugin.Plugin;
-import cn.nukkit.plugin.service.NKServiceManager;
-import cn.nukkit.plugin.service.RegisteredServiceProvider;
-import cn.nukkit.plugin.service.ServicePriority;
-import cn.nukkit.utils.Config;
+import org.powernukkitx.Server;
+import org.powernukkitx.plugin.Plugin;
+import org.powernukkitx.plugin.service.NKServiceManager;
+import org.powernukkitx.plugin.service.RegisteredServiceProvider;
+import org.powernukkitx.plugin.service.ServicePriority;
+import org.powernukkitx.utils.Config;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

@@ -16,13 +16,16 @@
 
 package ovis.futureplots.schematic;
 
-import cn.nukkit.Server;
-import cn.nukkit.blockentity.BlockEntity;
-import cn.nukkit.level.format.IChunk;
-import cn.nukkit.math.BlockVector3;
-import cn.nukkit.math.Vector3;
-import cn.nukkit.nbt.tag.CompoundTag;
-import cn.nukkit.utils.BinaryStream;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
+import org.powernukkitx.Server;
+import org.powernukkitx.blockentity.BlockEntity;
+import org.powernukkitx.level.format.IChunk;
+import org.powernukkitx.math.BlockVector3;
+import org.powernukkitx.math.Vector3;
+import org.powernukkitx.nbt.tag.CompoundTag;
 import com.github.luben.zstd.Zstd;
 import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -37,9 +40,9 @@ import ovis.futureplots.components.util.ShapeType;
 import ovis.futureplots.components.util.nukkit.Zlib;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.*;
 
 /**
@@ -137,49 +140,91 @@ public class Schematic {
     }
 
     public synchronized void init(File file) {
-        try(final FileInputStream fileInputStream = new FileInputStream(file)) {
-            final byte[] bytes = new byte[fileInputStream.available()];
-            final BinaryStream binaryStream = new BinaryStream(Arrays.copyOf(bytes, fileInputStream.read(bytes)));
+        try {
+            byte[] bytes = Files.readAllBytes(file.toPath());
+            ByteBuf buf = Unpooled.wrappedBuffer(bytes);
+            ByteBufInputStream in = new ByteBufInputStream(buf);
 
-            if(!Arrays.equals(binaryStream.get(MAGIC.length), MAGIC)) {
-                binaryStream.setBuffer(Zlib.inflate(binaryStream.getBuffer()));
-                binaryStream.setOffset(0);
+            byte[] magicRead = new byte[MAGIC.length];
+            in.readFully(magicRead);
 
-                SchematicSerializers.get(1).deserialize(this, binaryStream);
+            // Legacy (Zlib)
+            if (!Arrays.equals(magicRead, MAGIC)) {
+                byte[] inflated = Zlib.inflate(bytes);
+                ByteBuf legacyBuf = Unpooled.wrappedBuffer(inflated);
+
+                SchematicSerializers.get(1).deserialize(this, legacyBuf);
                 Server.getInstance().getScheduler().scheduleDelayedTask(null, () -> this.save(file), 1);
                 return;
             }
 
-            final int version = binaryStream.getByte();
+            // Version
+            int version = in.readByte();
 
-            final int decompressedSize = binaryStream.getLInt();
-            binaryStream.setBuffer(Zstd.decompress(binaryStream.get(), decompressedSize));
-            binaryStream.setOffset(0);
+            int b1 = in.read();
+            int b2 = in.read();
+            int b3 = in.read();
+            int b4 = in.read();
+            int decompressedSize = (b1 & 0xFF)
+                    | ((b2 & 0xFF) << 8)
+                    | ((b3 & 0xFF) << 16)
+                    | ((b4 & 0xFF) << 24);
 
-            SchematicSerializers.get(version).deserialize(this, binaryStream);
-        } catch(IOException e) {
+            byte[] compressed = new byte[buf.readableBytes()];
+            in.readFully(compressed);
+
+            byte[] decompressed = Zstd.decompress(compressed, decompressedSize);
+
+            ByteBuf dataBuf = Unpooled.wrappedBuffer(decompressed);
+            ByteBufInputStream dataIn = new ByteBufInputStream(dataBuf);
+
+            SchematicSerializers.get(version).deserialize(this, dataBuf);
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 
     public synchronized void save(File file) {
-        try(final FileOutputStream fileOutputStream = new FileOutputStream(file)) {
-            final SchematicSerializer schematicSerializer = SchematicSerializers.getLatest();
-            final BinaryStream contentBinaryStream = new BinaryStream();
-            final BinaryStream headerBinaryStream = new BinaryStream();
+        try (FileOutputStream fos = new FileOutputStream(file)) {
 
-            schematicSerializer.serialize(this, contentBinaryStream);
+            SchematicSerializer serializer = SchematicSerializers.getLatest();
 
-            headerBinaryStream.put(MAGIC);
-            headerBinaryStream.putByte((byte) schematicSerializer.version());
+            ByteBuf contentBuf = Unpooled.buffer();
+            ByteBufOutputStream contentOut = new ByteBufOutputStream(contentBuf);
 
-            headerBinaryStream.putLInt(contentBinaryStream.getCount());
-            headerBinaryStream.put(Zstd.compress(contentBinaryStream.get()));
+            serializer.serialize(this, contentBuf);
 
-            fileOutputStream.write(headerBinaryStream.getBuffer());
-        } catch(IOException e) {
+            byte[] raw = new byte[contentBuf.readableBytes()];
+            contentBuf.readBytes(raw);
+
+            byte[] compressed = Zstd.compress(raw);
+
+            ByteBuf headerBuf = Unpooled.buffer();
+            ByteBufOutputStream headerOut = new ByteBufOutputStream(headerBuf);
+
+            headerOut.write(MAGIC);
+
+            headerOut.writeByte(serializer.version());
+
+            headerOut.write(raw.length & 0xFF);
+            headerOut.write((raw.length >>> 8) & 0xFF);
+            headerOut.write((raw.length >>> 16) & 0xFF);
+            headerOut.write((raw.length >>> 24) & 0xFF);
+
+            headerOut.write(compressed);
+
+            byte[] finalData = new byte[headerBuf.readableBytes()];
+            headerBuf.readBytes(finalData);
+
+            fos.write(finalData);
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
 }

@@ -18,7 +18,7 @@
 
 package ovis.futureplots.schematic;
 
-import cn.nukkit.nbt.tag.CompoundTag;
+import org.powernukkitx.nbt.tag.CompoundTag;
 import lombok.Value;
 
 /**

@@ -18,12 +18,12 @@
 
 package ovis.futureplots.generator;
 
-import cn.nukkit.level.Level;
-import cn.nukkit.level.format.ChunkState;
-import cn.nukkit.level.format.IChunk;
-import cn.nukkit.level.format.LevelProvider;
-import cn.nukkit.level.generator.ChunkGenerateContext;
-import cn.nukkit.level.generator.GenerateStage;
+import org.powernukkitx.level.Level;
+import org.powernukkitx.level.format.ChunkState;
+import org.powernukkitx.level.format.IChunk;
+import org.powernukkitx.level.format.LevelProvider;
+import org.powernukkitx.level.generator.ChunkGenerateContext;
+import org.powernukkitx.level.generator.GenerateStage;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.manager.PlotManager;
 import ovis.futureplots.schematic.Schematic;

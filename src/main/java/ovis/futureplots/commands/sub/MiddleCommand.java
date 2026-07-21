@@ -18,13 +18,13 @@
 
 package ovis.futureplots.commands.sub;
 
-import cn.nukkit.Player;
-import cn.nukkit.Server;
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParamType;
-import cn.nukkit.command.data.CommandParameter;
-import cn.nukkit.math.BlockVector3;
-import cn.nukkit.math.Vector3;
+import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
+import org.powernukkitx.Player;
+import org.powernukkitx.Server;
+import org.powernukkitx.command.CommandSender;
+import org.powernukkitx.command.data.CommandParameter;
+import org.powernukkitx.math.BlockVector3;
+import org.powernukkitx.math.Vector3;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.commands.SubCommand;
 import ovis.futureplots.components.util.Plot;
@@ -44,7 +44,7 @@ public class MiddleCommand extends SubCommand {
         this.identify();
         this.playerOnly();
         this.setPermissions("plots.middle", "plots.perm.basic");
-        this.addParameter(CommandParameter.newType("player", CommandParamType.TARGET));
+        this.addParameter(CommandParameter.newType("player", CommandParamType.SELECTION));
     }
 
     @Override

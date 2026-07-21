@@ -18,17 +18,17 @@
 
 package ovis.futureplots;
 
-import cn.nukkit.Player;
-import cn.nukkit.Server;
-import cn.nukkit.level.DimensionEnum;
-import cn.nukkit.level.Level;
-import cn.nukkit.level.format.LevelConfig;
-import cn.nukkit.plugin.PluginBase;
-import cn.nukkit.registry.RegisterException;
-import cn.nukkit.registry.Registries;
-import cn.nukkit.utils.Config;
 import lombok.Getter;
 import lombok.Setter;
+import org.powernukkitx.Player;
+import org.powernukkitx.Server;
+import org.powernukkitx.level.DimensionEnum;
+import org.powernukkitx.level.Level;
+import org.powernukkitx.level.format.LevelConfig;
+import org.powernukkitx.plugin.PluginBase;
+import org.powernukkitx.registry.RegisterException;
+import org.powernukkitx.registry.Registries;
+import org.powernukkitx.utils.Config;
 import ovis.futureplots.commands.PlotCommand;
 import ovis.futureplots.components.bstats.Metrics;
 import ovis.futureplots.components.provider.data.DataProvider;
@@ -136,6 +136,12 @@ public class FuturePlots extends PluginBase {
     public void onEnable() {
         this.worldsConfig = new Config(new File(this.getDataFolder(), "worlds.yml"), Config.YAML);
 
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         saveResource("config.yml");
 

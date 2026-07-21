@@ -17,7 +17,7 @@
 
 package ovis.futureplots.components.util.language.handler;
 
-import cn.nukkit.utils.Config;
+import org.powernukkitx.utils.Config;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.components.util.language.provider.LanguageProvider;
 

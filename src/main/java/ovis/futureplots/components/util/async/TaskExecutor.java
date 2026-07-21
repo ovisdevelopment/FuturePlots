@@ -18,7 +18,7 @@
 
 package ovis.futureplots.components.util.async;
 
-import cn.nukkit.Server;
+import org.powernukkitx.Server;
 
 /**
  * @modified Tim tim03we, Ovis Development (2024)

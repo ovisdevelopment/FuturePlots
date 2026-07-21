@@ -18,8 +18,8 @@
 
 package ovis.futureplots.event;
 
-import cn.nukkit.Player;
-import cn.nukkit.event.HandlerList;
+import org.powernukkitx.Player;
+import org.powernukkitx.event.HandlerList;
 import lombok.Getter;
 import ovis.futureplots.components.util.Plot;
 

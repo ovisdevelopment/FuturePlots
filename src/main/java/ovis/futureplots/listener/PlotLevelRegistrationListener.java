@@ -18,16 +18,16 @@
 
 package ovis.futureplots.listener;
 
-import cn.nukkit.Player;
-import cn.nukkit.block.BlockAir;
-import cn.nukkit.block.BlockState;
-import cn.nukkit.event.EventHandler;
-import cn.nukkit.event.EventPriority;
-import cn.nukkit.event.Listener;
-import cn.nukkit.event.player.PlayerChatEvent;
-import cn.nukkit.level.Level;
-import cn.nukkit.registry.Registries;
 import lombok.RequiredArgsConstructor;
+import org.powernukkitx.Player;
+import org.powernukkitx.block.BlockAir;
+import org.powernukkitx.block.BlockState;
+import org.powernukkitx.event.EventHandler;
+import org.powernukkitx.event.EventPriority;
+import org.powernukkitx.event.Listener;
+import org.powernukkitx.event.player.PlayerChatEvent;
+import org.powernukkitx.level.Level;
+import org.powernukkitx.registry.Registries;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.components.util.language.manager.LanguageManager;
 import ovis.futureplots.components.util.language.TranslationKey;
@@ -44,7 +44,7 @@ public class PlotLevelRegistrationListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onChat(PlayerChatEvent event) {
         final Player player = event.getPlayer();
-        LanguageManager language = new LanguageManager(player.getLoginChainData().getLanguageCode());
+        LanguageManager language = new LanguageManager(player.getClientChainData().getLanguageCode());
         if (this.plugin.getLevelRegistrationMap().containsKey(player)) {
             event.setCancelled(true);
 

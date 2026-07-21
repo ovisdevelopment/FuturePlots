@@ -18,8 +18,8 @@
 
 package ovis.futureplots.components.util;
 
-import cn.nukkit.block.Block;
-import cn.nukkit.block.BlockState;
+import org.powernukkitx.block.Block;
+import org.powernukkitx.block.BlockState;
 import lombok.Builder;
 import lombok.Value;
 

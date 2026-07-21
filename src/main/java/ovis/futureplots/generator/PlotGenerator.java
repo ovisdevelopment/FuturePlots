@@ -18,21 +18,21 @@
 
 package ovis.futureplots.generator;
 
-import cn.nukkit.Player;
-import cn.nukkit.block.BlockAir;
-import cn.nukkit.block.BlockState;
-import cn.nukkit.blockentity.BlockEntity;
-import cn.nukkit.entity.Entity;
-import cn.nukkit.level.DimensionData;
-import cn.nukkit.level.DimensionEnum;
-import cn.nukkit.level.Level;
-import cn.nukkit.level.format.IChunk;
-import cn.nukkit.level.generator.GenerateStage;
-import cn.nukkit.level.generator.Generator;
-import cn.nukkit.level.generator.stages.FinishedStage;
-import cn.nukkit.level.generator.stages.LightPopulationStage;
-import cn.nukkit.math.Vector3;
-import cn.nukkit.registry.Registries;
+import org.powernukkitx.Player;
+import org.powernukkitx.block.BlockAir;
+import org.powernukkitx.block.BlockState;
+import org.powernukkitx.blockentity.BlockEntity;
+import org.powernukkitx.entity.Entity;
+import org.powernukkitx.level.DimensionData;
+import org.powernukkitx.level.DimensionEnum;
+import org.powernukkitx.level.Level;
+import org.powernukkitx.level.format.IChunk;
+import org.powernukkitx.level.generator.GenerateStage;
+import org.powernukkitx.level.generator.Generator;
+import org.powernukkitx.level.generator.stages.FinishedStage;
+import org.powernukkitx.level.generator.stages.LightPopulationStage;
+import org.powernukkitx.math.Vector3;
+import org.powernukkitx.registry.Registries;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.manager.PlotManager;
 import ovis.futureplots.schematic.Schematic;

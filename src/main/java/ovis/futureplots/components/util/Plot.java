@@ -18,14 +18,12 @@
 
 package ovis.futureplots.components.util;
 
-import cn.nukkit.math.BlockVector3;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import ovis.futureplots.FuturePlots;
-import ovis.futureplots.components.util.flags.Flag;
+import org.powernukkitx.math.BlockVector3;
 import ovis.futureplots.components.util.flags.FlagRegistry;
 import ovis.futureplots.manager.PlotManager;
 

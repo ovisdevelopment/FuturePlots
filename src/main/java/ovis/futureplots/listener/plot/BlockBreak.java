@@ -18,20 +18,18 @@
 
 package ovis.futureplots.listener.plot;
 
-import cn.nukkit.Player;
-import cn.nukkit.Server;
-import cn.nukkit.block.Block;
-import cn.nukkit.event.EventHandler;
-import cn.nukkit.event.EventPriority;
-import cn.nukkit.event.Listener;
-import cn.nukkit.event.block.BlockBreakEvent;
 import lombok.RequiredArgsConstructor;
+import org.powernukkitx.Player;
+import org.powernukkitx.block.Block;
+import org.powernukkitx.event.EventHandler;
+import org.powernukkitx.event.EventPriority;
+import org.powernukkitx.event.Listener;
+import org.powernukkitx.event.block.BlockBreakEvent;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.components.util.language.manager.LanguageManager;
 import ovis.futureplots.components.util.language.TranslationKey;
 import ovis.futureplots.manager.PlotManager;
 import ovis.futureplots.components.util.Plot;
-import ovis.futureplots.components.util.Utils;
 
 import java.util.List;
 
@@ -61,7 +59,7 @@ public class BlockBreak implements Listener {
 
                 if(FuturePlots.getSettings().isHomeProtectEnabled() && plot.getHomePosition() != null && plot.getHomePosition().distance(event.getBlock()) < FuturePlots.getSettings().getHomeProtectDistance()) {
                     event.setCancelled(true);
-                    LanguageManager language = new LanguageManager(player.getLoginChainData().getLanguageCode());
+                    LanguageManager language = new LanguageManager(player.getClientChainData().getLanguageCode());
                     player.sendMessage(language.message(TranslationKey.TOO_CLOSE_TO_HOME));
                 }
             } else {
