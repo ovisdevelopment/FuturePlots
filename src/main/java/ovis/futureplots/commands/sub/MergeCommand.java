@@ -28,7 +28,6 @@ import ovis.futureplots.event.PlotMergeEvent;
 import ovis.futureplots.event.PlotPreMergeEvent;
 import ovis.futureplots.components.util.language.TranslationKey;
 import ovis.futureplots.manager.PlotManager;
-import ovis.futureplots.components.util.Plot;
 
 import java.util.Set;
 

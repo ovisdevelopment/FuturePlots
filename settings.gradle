@@ -1,0 +1,4 @@
+rootProject.name = "FuturePlots"
+
+include(":futureplots-core")
+include(":futureplots-pnx")

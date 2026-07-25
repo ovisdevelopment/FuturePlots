@@ -22,7 +22,6 @@ import org.powernukkitx.Player;
 import org.powernukkitx.event.Cancellable;
 import org.powernukkitx.event.HandlerList;
 import lombok.Getter;
-import ovis.futureplots.components.util.Plot;
 
 import java.util.Set;
 

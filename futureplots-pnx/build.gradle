@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'dev.ovis.futureplots.pnx'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+
+    maven {
+        name = "PowerNukkitX-releases"
+        url = uri("https://repo.powernukkitx.org/releases")
+    }
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    implementation project(':futureplots-core')
+
+    compileOnly "org.powernukkitx:server:nightly-SNAPSHOT"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+shadowJar {
+    archiveBaseName.set('futureplots-pnx')
+    archiveClassifier.set('')
+    archiveVersion.set('')
+}

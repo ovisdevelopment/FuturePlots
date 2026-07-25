@@ -27,7 +27,6 @@ import org.powernukkitx.level.generator.GenerateStage;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.manager.PlotManager;
 import ovis.futureplots.schematic.Schematic;
-import ovis.futureplots.components.util.ShapeType;
 
 import static ovis.futureplots.generator.PlotGenerator.*;
 

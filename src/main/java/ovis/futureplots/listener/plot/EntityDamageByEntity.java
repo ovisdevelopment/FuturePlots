@@ -28,7 +28,6 @@ import org.powernukkitx.event.entity.EntityDamageByEntityEvent;
 import lombok.RequiredArgsConstructor;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.manager.PlotManager;
-import ovis.futureplots.components.util.Plot;
 
 /**
  * @modified Tim tim03we, Ovis Development (2024)

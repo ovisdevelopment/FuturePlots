@@ -35,8 +35,6 @@ import lombok.ToString;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.schematic.format.SchematicSerializer;
 import ovis.futureplots.schematic.format.SchematicSerializers;
-import ovis.futureplots.components.util.Allowed;
-import ovis.futureplots.components.util.ShapeType;
 import ovis.futureplots.components.util.nukkit.Zlib;
 
 import java.io.File;

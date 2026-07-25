@@ -31,7 +31,6 @@ import org.powernukkitx.registry.Registries;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.components.util.language.manager.LanguageManager;
 import ovis.futureplots.components.util.language.TranslationKey;
-import ovis.futureplots.components.util.PlotLevelRegistration;
 
 /**
  * @modified Tim tim03we, Ovis Development (2024)

@@ -22,7 +22,6 @@ import lombok.Setter;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.components.provider.economy.client.EconomyClient;
 import ovis.futureplots.components.provider.economy.client.enums.ClientType;
-import ovis.futureplots.components.util.Settings;
 
 import java.util.*;
 

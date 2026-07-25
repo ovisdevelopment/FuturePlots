@@ -23,7 +23,6 @@ import org.powernukkitx.event.Cancellable;
 import org.powernukkitx.event.HandlerList;
 import lombok.Getter;
 import lombok.Setter;
-import ovis.futureplots.components.util.Plot;
 
 /**
  * @modified Tim tim03we, Ovis Development (2024)

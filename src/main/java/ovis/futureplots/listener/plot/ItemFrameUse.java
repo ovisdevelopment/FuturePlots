@@ -25,7 +25,6 @@ import org.powernukkitx.event.Listener;
 import org.powernukkitx.event.block.ItemFrameUseEvent;
 import lombok.RequiredArgsConstructor;
 import ovis.futureplots.FuturePlots;
-import ovis.futureplots.components.util.Plot;
 import ovis.futureplots.manager.PlotManager;
 
 /**

@@ -32,7 +32,6 @@ import ovis.futureplots.components.util.flags.FlagRegistry;
 import ovis.futureplots.components.util.flags.FlagType;
 import ovis.futureplots.components.util.language.TranslationKey;
 import ovis.futureplots.manager.PlotManager;
-import ovis.futureplots.components.util.Plot;
 
 import java.util.ArrayList;
 import java.util.List;

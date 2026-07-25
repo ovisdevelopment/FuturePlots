@@ -26,7 +26,6 @@ import ovis.futureplots.event.PlotClaimEvent;
 import ovis.futureplots.event.PlotPreClaimEvent;
 import ovis.futureplots.components.util.language.TranslationKey;
 import ovis.futureplots.manager.PlotManager;
-import ovis.futureplots.components.util.Plot;
 
 /**
  * @modified Tim tim03we, Ovis Development (2024)

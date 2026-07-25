@@ -33,8 +33,6 @@ import ovis.futureplots.components.util.language.TranslationKey;
 import ovis.futureplots.manager.PlotManager;
 import ovis.futureplots.schematic.Schematic;
 import ovis.futureplots.schematic.SchematicBlock;
-import ovis.futureplots.components.util.ChunkVector;
-import ovis.futureplots.components.util.ShapeType;
 import ovis.futureplots.components.util.async.TaskExecutor;
 
 import java.util.LinkedHashMap;

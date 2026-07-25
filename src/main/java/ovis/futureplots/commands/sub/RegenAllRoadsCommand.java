@@ -29,7 +29,6 @@ import ovis.futureplots.commands.SubCommand;
 import ovis.futureplots.generator.PlotGenerator;
 import ovis.futureplots.components.util.language.TranslationKey;
 import ovis.futureplots.manager.PlotManager;
-import ovis.futureplots.components.util.Utils;
 import ovis.futureplots.components.util.async.TaskExecutor;
 
 /**

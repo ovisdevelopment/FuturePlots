@@ -1,0 +1,73 @@
+plugins {
+    id 'java'
+}
+
+// Version
+ext {
+    mongodb = '5.2.1'
+    redisson = '3.20.0'
+
+    lombok = '1.18.30'
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    group = 'dev.ovis.futureplots'
+    version = '1.0.0'
+
+    repositories {
+        mavenCentral()
+
+        maven {
+            name = "jitpack.io"
+            url = uri("https://www.jitpack.io")
+        }
+
+        maven {
+            name = "opencollab-repository-maven-releases"
+            url = uri("https://repo.opencollab.dev/maven-releases")
+        }
+
+        maven {
+            name = "opencollab-repository-maven-snapshots"
+            url = uri("https://repo.opencollab.dev/maven-snapshots")
+        }
+    }
+
+    // Optional: gemeinsame Dependencies
+    dependencies {
+        testImplementation 'junit:junit:4.13.2'
+
+        // Lombok (provided)
+        compileOnly "org.projectlombok:lombok:1.18.30"
+        annotationProcessor "org.projectlombok:lombok:1.18.30"
+
+        // Gson
+        implementation "com.google.code.gson:gson:2.10.1"
+
+        // Zstd JNI
+        implementation "com.github.luben:zstd-jni:1.5.2-3"
+
+        // MySQL Connector
+        implementation "com.mysql:mysql-connector-j:8.3.0"
+
+        // SQLite JDBC
+        implementation "org.xerial:sqlite-jdbc:3.53.2.1"
+
+        // org.json
+        implementation "org.json:json:20240303"
+
+        // LlamaEconomy
+        implementation "net.lldv.llamaeconomy:LlamaEconomy:1.0.2"
+
+        // MongoDB Driver Sync
+        implementation "org.mongodb:mongodb-driver-sync:5.2.1"
+    }
+}
+
+subprojects {
+    tasks.withType(Jar).configureEach {
+        destinationDirectory = file("$rootDir/build/jars")
+    }
+}

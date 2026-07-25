@@ -24,7 +24,6 @@ import org.powernukkitx.block.BlockState;
 import org.powernukkitx.level.Level;
 import org.powernukkitx.level.format.IChunk;
 import org.powernukkitx.math.BlockVector3;
-import ovis.futureplots.components.util.WhenDone;
 
 import java.util.ArrayDeque;
 import java.util.HashSet;

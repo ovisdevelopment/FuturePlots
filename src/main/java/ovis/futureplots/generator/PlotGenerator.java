@@ -36,10 +36,6 @@ import org.powernukkitx.registry.Registries;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.manager.PlotManager;
 import ovis.futureplots.schematic.Schematic;
-import ovis.futureplots.components.util.Allowed;
-import ovis.futureplots.components.util.LevelUtils;
-import ovis.futureplots.components.util.PlotLevelSettings;
-import ovis.futureplots.components.util.ShapeType;
 import ovis.futureplots.components.util.async.TaskExecutor;
 
 import java.util.*;

@@ -21,7 +21,6 @@ package ovis.futureplots.event;
 import org.powernukkitx.event.Event;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import ovis.futureplots.components.util.Plot;
 
 /**
  * @modified Tim tim03we, Ovis Development (2024)

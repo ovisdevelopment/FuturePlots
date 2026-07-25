@@ -26,7 +26,6 @@ import org.powernukkitx.event.Listener;
 import org.powernukkitx.event.block.BlockIgniteEvent;
 import ovis.futureplots.FuturePlots;
 import ovis.futureplots.manager.PlotManager;
-import ovis.futureplots.components.util.Plot;
 
 /**
  * @modified Tim tim03we, Ovis Development (2024)

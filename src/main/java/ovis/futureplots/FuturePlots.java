@@ -40,8 +40,6 @@ import ovis.futureplots.listener.plot.*;
 import ovis.futureplots.generator.PlotGenerator;
 import ovis.futureplots.generator.PlotStage;
 import ovis.futureplots.listener.PlotLevelRegistrationListener;
-import ovis.futureplots.manager.PlayerManager;
-import ovis.futureplots.manager.PlayerNameFunction;
 import ovis.futureplots.manager.PlotManager;
 import ovis.futureplots.components.util.async.TaskExecutor;
 

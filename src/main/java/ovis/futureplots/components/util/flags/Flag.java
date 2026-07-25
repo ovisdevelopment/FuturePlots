@@ -18,7 +18,6 @@
 package ovis.futureplots.components.util.flags;
 
 import lombok.Getter;
-import ovis.futureplots.components.util.Plot;
 
 /**
  * @author Tim tim03we, Ovis Development (2024)
