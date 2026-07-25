@@ -42,7 +42,7 @@ public final class ZlibThreadLocal implements ZlibProvider {
     }
 
     @Override
-    public byte[] deflate(byte[] data, int level) throws IOException {
+    public byte[] deflate(byte[] data, int level) {
         Deflater deflater = DEFLATER.get();
         deflater.reset();
         deflater.setLevel(level);
@@ -85,7 +85,7 @@ public final class ZlibThreadLocal implements ZlibProvider {
     }
 
     @Override
-    public byte[] deflateRaw(byte[] data, int level) throws IOException {
+    public byte[] deflateRaw(byte[] data, int level) {
         Deflater deflater = DEFLATER_RAW.get();
         deflater.reset();
         //deflater.setLevel(data.length < Server.getInstance().networkCompressionThreshold ? 0 : level);
